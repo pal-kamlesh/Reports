@@ -2,8 +2,8 @@ import { ImageEditorComponent } from "@syncfusion/ej2-react-image-editor";
 import { useDispatch, useSelector } from "react-redux";
 import { imageUpload, reportHandleChange } from "../redux/reportSlice";
 import { registerLicense } from "@syncfusion/ej2-base";
+
 const appImage = import.meta.env.VITE_APP_IMAGE;
-console.log(appImage);
 registerLicense(appImage);
 
 const ImageEditor = ({ onClose, name }) => {
@@ -18,7 +18,7 @@ const ImageEditor = ({ onClose, name }) => {
     }
   };
 
-  const upload = async (args) => {
+  const upload = async () => {
     try {
       const image = convertImageToBase64(imgObj.getImageData());
       const res = await dispatch(imageUpload({ image })).unwrap();
