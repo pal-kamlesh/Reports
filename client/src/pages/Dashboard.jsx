@@ -56,11 +56,14 @@ const Dashboard = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-
   useEffect(() => {
-    dispatch(getAllUsers());
-    dispatch(allReports());
-    dispatch(getAdminValues());
+    if (show === "All Reports") {
+      dispatch(getAdminValues());
+      dispatch(allReports());
+    }
+    if (show === "All Users") {
+      dispatch(getAllUsers());
+    }
 
     // eslint-disable-next-line
   }, [page, show]);
@@ -150,7 +153,9 @@ const Dashboard = () => {
       <div className="row">
         <div className="col-2">
           <button
-            className={`btn btn-primary ${show === "All Reports" ? "border border-warning border-3" : ""}`}
+            className={`btn btn-primary ${
+              show === "All Reports" ? "border border-warning border-3" : ""
+            }`}
             onClick={(e) => setShow(e.target.textContent)}
           >
             All Reports
@@ -158,7 +163,9 @@ const Dashboard = () => {
         </div>
         <div className="col-2">
           <button
-            className={`btn btn-dark ${show === "All Users" ? "border border-warning border-3" : ""}`}
+            className={`btn btn-dark ${
+              show === "All Users" ? "border border-warning border-3" : ""
+            }`}
             onClick={(e) => setShow(e.target.textContent)}
           >
             All Users
@@ -166,7 +173,9 @@ const Dashboard = () => {
         </div>
         <div className="col-2">
           <button
-            className={`btn btn-primary ${show === "Email Data" ? "border border-warning border-3" : ""}`}
+            className={`btn btn-primary ${
+              show === "Email Data" ? "border border-warning border-3" : ""
+            }`}
             onClick={(e) => setShow(e.target.textContent)}
           >
             Email Data
@@ -174,7 +183,9 @@ const Dashboard = () => {
         </div>
         <div className="col-2">
           <button
-            className={`btn btn-dark ${show === "Add Template" ? "border border-warning border-3" : ""}`}
+            className={`btn btn-dark ${
+              show === "Add Template" ? "border border-warning border-3" : ""
+            }`}
             onClick={(e) => setShow(e.target.textContent)}
           >
             Add Template
@@ -267,12 +278,13 @@ const Dashboard = () => {
                 {pages.map((page) => (
                   <li className="page-item" key={page}>
                     <button
-                      className={`page-link ${currentPage === page ? "custom-bg-color" : null}`}
+                      className={`page-link ${
+                        currentPage === page ? "custom-bg-color" : null
+                      }`}
                       onClick={(e) => {
                         dispatch(changePage(e.target.textContent));
                         setCurrentPage(page);
-                      }
-                      }
+                      }}
                     >
                       {page}
                     </button>
@@ -426,7 +438,6 @@ const Dashboard = () => {
             </form>
           </>
         )}
-
       </div>
     </div>
   );
